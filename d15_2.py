@@ -58,16 +58,9 @@ for s,b in d:
         dx2 = dx + dy - ddy
         sx1 = max(0,s[0]-dx2)
         sx2 = min(4000000, s[0]+dx2)
-        if b[1] == y:
-            if b[0]==sx1:
-                sx1+=1
-            elif b[0]==sx2:
-                sx2-=1
         r[y] = checkrow(r[y], [sx1,sx2])
 
 res = list(filter(lambda y : len(y[1])>1, enumerate(r)))
 for y,x in res:
     xx = (x[0][1]+1)
-    if [xx,y] in bcn:
-        continue
     print(xx,y,y+4000000*xx )
