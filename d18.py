@@ -9,18 +9,6 @@ m = dict()
 G = nx.Graph()
 G2 = nx.Graph()
 
-def add_scan(m, s):
-    assert s not in m
-    other = m.keys()
-    sides = 6
-    for x in other:
-        c = Counter([abs(a-b) for a, b in zip(x, s)])
-        if c[0] == 2 and c[1] == 1:
-            m[x] -= 1
-            sides -= 1
-    m[s] = sides
-
-
 def add_scan2(m, s):
     assert s not in m
     other = m.keys()
@@ -51,7 +39,6 @@ hole = set()
 coords = list(zip(*v))
 minc = [min(list(x)) for x in coords]
 maxc = [max(list(x)) for x in coords]
-# print(minc, maxc)
 for x in range(minc[0], maxc[0]+1):
     for y in range(minc[1], maxc[1]+1):
         for z in range(minc[2], maxc[2]+1):
@@ -92,4 +79,4 @@ for n in trapped:
     if n in G2.nodes():
         count += len(list(nx.neighbors(G2,n)))
 
-print(count, part1-count)
+print(part1-count)
