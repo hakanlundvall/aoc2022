@@ -193,7 +193,7 @@ for i in instr:
     if i in "LR":
         ii = int(x)
         x = ""
-        pos, d = move2(pos, d,ii)
+        pos = move(pos, d,ii)
         d += 1 if i == 'R' else -1
         d %= 4 
     else:
@@ -203,6 +203,27 @@ if len(x) > 0:
     ii = int(x)
     x = ""
     pos = move(pos, d,ii)
+
+# print(pos, d)
+print(1000 * pos[0] + 4 * pos[1] + d)
+
+pos = (1, mincols[1])
+d = 0
+x = ""
+for i in instr:
+    if i in "LR":
+        ii = int(x)
+        x = ""
+        pos, d = move2(pos, d,ii)
+        d += 1 if i == 'R' else -1
+        d %= 4 
+    else:
+        x += i
+
+if len(x) > 0:
+    ii = int(x)
+    x = ""
+    pos,_ = move2(pos, d,ii)
 
 # print(pos, d)
 print(1000 * pos[0] + 4 * pos[1] + d)
