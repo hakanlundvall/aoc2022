@@ -1,7 +1,7 @@
 from collections import defaultdict, deque
 import heapq
 from math import gcd
-
+import functools
 data = [x.strip('\n') for x in open("i24.txt").readlines()]
 # data = [x.strip('\n') for x in open("t24.txt").readlines()]
 
@@ -40,8 +40,8 @@ def make_key(state):
     time, pos = state
     return (time%period, pos)
 
-
-def blizzard_list(time, blizzards):
+@functools.lru_cache
+def blizzard_list(time):
     d = {
         '<': (0,-time),
         '>': (0,time),
@@ -74,14 +74,10 @@ def trip(time, startpos, endpos):
             continue
         visited.add(k)
         time, pos = state
-        if time > maxt:
-            maxt = time
-            print(time)
         if pos == endpos:
-            print("end", time)
             return time
 
-        nogo = blizzard_list(time+1, blizzards)
+        nogo = blizzard_list(time+1)
         for d in [(-1,0),(1,0),(0,-1),(0,1),(0,0)]:
             newPos = tuple(map(sum,zip(pos,d)))
             nr, nc = newPos 
