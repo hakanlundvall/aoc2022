@@ -1,4 +1,5 @@
 from itertools import zip_longest, accumulate
+from collections import deque
 
 data = [x.strip('\n') for x in open("i25.txt").readlines()]
 
@@ -23,4 +24,4 @@ def addSNAFU(a: str, b: str) -> str:
         result.append(carry)
     return ''.join(list(map(number_to_SNAFU, reversed(result))))
 
-print(list(accumulate(data, func=addSNAFU, initial=""))[-1])
+print(deque(accumulate(data, func=addSNAFU, initial=""), 1).pop())
